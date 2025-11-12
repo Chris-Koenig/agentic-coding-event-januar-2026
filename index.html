@@ -387,17 +387,21 @@
             font-size: 1.4rem;
             color: #1a1a2e;
             margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.7rem;
+            display: block;
             font-weight: 600;
+            text-align: center;
+        }
+        
+        .info-card h3 svg {
+            display: block;
+            margin: 0 auto 0.5rem auto;
         }
 
         .info-card p {
             color: #666;
             line-height: 1.9;
             font-size: 1rem;
+            text-align: center;
         }
 
         .info-card strong {
@@ -549,81 +553,6 @@
             line-height: 1.9;
             font-weight: 400;
             margin: 0;
-        }
-
-        /* Why Section */
-        .why-section {
-            background: #ffffff;
-            padding: 6rem 2rem;
-            position: relative;
-        }
-
-        .why-header {
-            text-align: center;
-            margin-bottom: 5rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .section-title-large {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #1a1a2e;
-            line-height: 1.2;
-            margin: 0 0 1rem 0;
-            position: relative;
-            display: inline-block;
-        }
-
-        .why-content-blocks {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            gap: 3rem;
-        }
-
-        .why-block {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border-left: 5px solid #667eea;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .why-block:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-        }
-
-        .why-text {
-            font-size: 1.2rem;
-            line-height: 1.9;
-            color: #333;
-            margin: 0;
-            font-weight: 400;
-        }
-
-        .why-block-final {
-            margin-top: 2rem;
-            padding: 3rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 25px;
-            border: none;
-            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.3);
-        }
-
-        .why-text-final {
-            font-size: 1.4rem;
-            line-height: 1.9;
-            color: #ffffff;
-            margin: 0;
-            text-align: center;
-        }
-
-        .why-text-final strong {
-            font-weight: 700;
         }
 
         /* Speakers Section */
@@ -969,12 +898,10 @@
             
             <div class="info-grid">
                 <div class="info-card">
-                    <h3>
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-                        </svg>
-                        Date & Time
-                    </h3>
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                    </svg>
+                    <h3>Date & Time</h3>
                     <p>
                         <strong>Mittwoch, 28. Januar 2026</strong><br>
                         16:30 - 18:00<br>
@@ -983,12 +910,10 @@
                 </div>
 
                 <div class="info-card">
-                    <h3>
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                        Location
-                    </h3>
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <h3>Location</h3>
                     <p>
                         <strong>Isolutions AG</strong><br>
                         The Circle 38, 9th Floor<br>
@@ -998,12 +923,10 @@
                 </div>
 
                 <div class="info-card">
-                    <h3>
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                        Registration
-                    </h3>
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <h3>Registration</h3>
                     <p>
                         <strong>Free Event</strong><br>
                         Register on Meetup or LinkedIn<br>
@@ -1013,12 +936,10 @@
                 </div>
 
                 <div class="info-card">
-                    <h3>
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <path d="M16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zM5 8h14V6H5v2zm0 11V10h14v9H5z"/>
-                        </svg>
-                        What's Included
-                    </h3>
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zM5 8h14V6H5v2zm0 11V10h14v9H5z"/>
+                    </svg>
+                    <h3>What's Included</h3>
                     <p>
                         <strong>Full Experience</strong><br>
                         Expert presentations<br>
@@ -1180,45 +1101,6 @@
     </footer>
 
     <script>
-        // Enhanced title animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const title = document.getElementById('main-title');
-            
-            // Split text into individual characters for dramatic effect
-            const text = title.textContent;
-            title.innerHTML = '';
-            
-            text.split('').forEach((char, index) => {
-                const span = document.createElement('span');
-                span.textContent = char === ' ' ? '\u00A0' : char;
-                span.style.display = 'inline-block';
-                span.style.opacity = '0';
-                span.style.transform = 'translateY(50px) rotateX(90deg)';
-                span.style.animation = `charFlyIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${0.5 + index * 0.05}s forwards`;
-                title.appendChild(span);
-            });
-            
-            // Add dynamic style for character animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes charFlyIn {
-                    0% {
-                        opacity: 0;
-                        transform: translateY(50px) rotateX(90deg);
-                    }
-                    50% {
-                        opacity: 0.5;
-                        transform: translateY(-10px) rotateX(45deg);
-                    }
-                    100% {
-                        opacity: 1;
-                        transform: translateY(0) rotateX(0deg);
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        });
-
         // Mobile navigation toggle
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
@@ -1277,7 +1159,7 @@
         }, observerOptions);
 
         // Observe elements for scroll animations
-        document.querySelectorAll('.info-card, .topic-card, .schedule-item, .why-block').forEach(el => {
+        document.querySelectorAll('.info-card, .topic-card, .schedule-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
