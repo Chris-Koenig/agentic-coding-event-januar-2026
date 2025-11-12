@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Meetup Zürich - Connect. Learn. Innovate.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            margin: 0;
+        }
+
+        .nav-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 3px;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: 
+                linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.85) 50%, rgba(255, 95, 109, 0.8) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.1" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+            padding-top: 5rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 95, 109, 0.3) 0%, transparent 50%);
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: flyIn 1.5s ease-out 0.5s forwards;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1s forwards;
+            font-weight: 400;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h3 {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.3s forwards;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .registration-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.8s forwards;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            cursor: pointer;
+            min-width: 220px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+        }
+
+        /* Floating particles animation */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Info Section */
+        .info-section {
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: #1a1a2e;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .info-card {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .info-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .info-card h3 {
+            font-size: 1.4rem;
+            color: #1a1a2e;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 600;
+        }
+
+        .info-card p {
+            color: #666;
+            line-height: 1.9;
+            font-size: 1rem;
+        }
+
+        .info-card strong {
+            color: #1a1a2e;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .icon {
+            width: 28px;
+            height: 28px;
+            fill: url(#gradient);
+        }
+
+        /* Topic Section */
+        .topic-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .topic-section .section-title {
+            color: #ffffff;
+        }
+
+        .topic-section .section-title::after {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .topic-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            min-height: 280px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f5576c 100%);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            background: #ffffff;
+        }
+
+        .card-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.4s ease;
+        }
+
+        .topic-card:hover .card-logo {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .card-logo svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .topic-card h3 {
+            font-size: 1.3rem;
+            color: #1a1a2e;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .topic-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .topic-card li {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 0.7rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .topic-card li::before {
+            content: '→';
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .topic-conclusion {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 3rem;
+            border-radius: 25px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .topic-conclusion p {
+            font-size: 1.3rem;
+            color: #ffffff;
+            line-height: 1.9;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        /* Why Section */
+        .why-section {
+            background: #ffffff;
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .why-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title-large {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            line-height: 1.2;
+            margin: 0 0 1rem 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .why-content-blocks {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            gap: 3rem;
+        }
+
+        .why-block {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .why-block:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .why-text {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #333;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .why-block-final {
+            margin-top: 2rem;
+            padding: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            border: none;
+            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .why-text-final {
+            font-size: 1.4rem;
+            line-height: 1.9;
+            color: #ffffff;
+            margin: 0;
+            text-align: center;
+        }
+
+        .why-text-final strong {
+            font-weight: 700;
+        }
+
+        /* Schedule Section */
+        .schedule {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .schedule::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="0.5" fill="%23ffffff" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .schedule-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-weight: 700;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .schedule-item {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .schedule-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(15px);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .schedule-time {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            min-width: 140px;
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .schedule-event {
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a0a;
+            color: #999;
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        @keyframes flyIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tablet responsive */
+        @media (max-width: 1024px) {
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .topic-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .topic-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+
+            .hero h3 {
+                font-size: 1rem;
+            }
+
+            .registration-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .schedule-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .schedule-time {
+                min-width: auto;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .section-title-large {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">🚀 Tech Meetup Zürich</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#details" class="nav-link">Details</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#topics" class="nav-link">Topics</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#schedule" class="nav-link">Schedule</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#register" class="nav-link">Register</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SVG Gradient Definition -->
+    <svg style="display: none;">
+        <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 id="main-title">Tech Innovation Summit</h1>
+            <h2>Connect. Learn. Innovate.</h2>
+            <h3>Join Zürich's premier tech community for an evening of cutting-edge insights, hands-on learning, and meaningful connections with fellow innovators.</h3>
+            
+            <div class="registration-buttons" id="register">
+                <a href="https://www.meetup.com/" class="btn btn-primary" target="_blank">
+                    <span>Register on Meetup</span>
+                </a>
+                <a href="https://www.linkedin.com/events/" class="btn btn-secondary" target="_blank">
+                    <span>Save on LinkedIn</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Floating particles -->
+        <div class="particle" style="width: 4px; height: 4px; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="width: 6px; height: 6px; left: 20%; animation-delay: 2s;"></div>
+        <div class="particle" style="width: 3px; height: 3px; left: 30%; animation-delay: 4s;"></div>
+        <div class="particle" style="width: 5px; height: 5px; left: 40%; animation-delay: 1s;"></div>
+        <div class="particle" style="width: 4px; height: 4px; left: 50%; animation-delay: 3s;"></div>
+        <div class="particle" style="width: 6px; height: 6px; left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="width: 3px; height: 3px; left: 70%; animation-delay: 2s;"></div>
+        <div class="particle" style="width: 5px; height: 5px; left: 80%; animation-delay: 4s;"></div>
+        <div class="particle" style="width: 4px; height: 4px; left: 90%; animation-delay: 1s;"></div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section" id="details">
+        <div class="container">
+            <h2 class="section-title">Event Essentials</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                        </svg>
+                        Date & Time
+                    </h3>
+                    <p>
+                        <strong>Thursday, January 23, 2026</strong><br>
+                        6:00 PM - 8:30 PM CET<br>
+                        Networking until 9:30 PM
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        Location
+                    </h3>
+                    <p>
+                        <strong>Tech Hub Zürich</strong><br>
+                        Europaallee 41<br>
+                        8004 Zürich<br>
+                        Switzerland
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Registration
+                    </h3>
+                    <p>
+                        <strong>Free Event</strong><br>
+                        Register on Meetup or LinkedIn<br>
+                        Limited to 50 participants<br>
+                        RSVP required
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zM5 8h14V6H5v2zm0 11V10h14v9H5z"/>
+                        </svg>
+                        What's Included
+                    </h3>
+                    <p>
+                        <strong>Full Experience</strong><br>
+                        Expert presentations<br>
+                        Hands-on workshops<br>
+                        Food & drinks included<br>
+                        Networking opportunities
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Topics Section -->
+    <section class="topic-section" id="topics">
+        <div class="container">
+            <h2 class="section-title">What You'll Explore</h2>
+            
+            <div class="topic-grid">
+                <div class="topic-card">
+                    <div class="card-logo">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3>AI & Machine Learning</h3>
+                    <ul>
+                        <li>Latest AI trends & applications</li>
+                        <li>Practical ML implementation</li>
+                        <li>Real-world case studies</li>
+                        <li>Future of AI development</li>
+                    </ul>
+                </div>
+
+                <div class="topic-card">
+                    <div class="card-logo">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                        </svg>
+                    </div>
+                    <h3>Cloud Architecture</h3>
+                    <ul>
+                        <li>Scalable system design</li>
+                        <li>Microservices patterns</li>
+                        <li>Cloud-native strategies</li>
+                        <li>Performance optimization</li>
+                    </ul>
+                </div>
+
+                <div class="topic-card">
+                    <div class="card-logo">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                    </div>
+                    <h3>DevOps Excellence</h3>
+                    <ul>
+                        <li>CI/CD best practices</li>
+                        <li>Infrastructure as Code</li>
+                        <li>Automation strategies</li>
+                        <li>Monitoring & observability</li>
+                    </ul>
+                </div>
+
+                <div class="topic-card">
+                    <div class="card-logo">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM8.5 16L12 13.5 15.5 16 12 18.5 8.5 16z"/>
+                        </svg>
+                    </div>
+                    <h3>Hands-On Workshops</h3>
+                    <ul>
+                        <li>Interactive coding sessions</li>
+                        <li>Live demonstrations</li>
+                        <li>Expert Q&A sessions</li>
+                        <li>Practical takeaways</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="topic-conclusion">
+                <p>
+                    Join us for an immersive evening where theory meets practice. Network with industry leaders, 
+                    share insights, and discover the latest innovations shaping the future of technology.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Attend Section -->
+    <section class="why-section">
+        <div class="container">
+            <div class="why-header">
+                <h2 class="section-title-large">Why Attend</h2>
+            </div>
+            
+            <div class="why-content-blocks">
+                <div class="why-block">
+                    <p class="why-text">
+                        Technology is evolving at an unprecedented pace. Stay ahead of the curve by learning from 
+                        industry experts who are shaping the future. Gain practical insights you can apply immediately 
+                        to your projects and career.
+                    </p>
+                </div>
+
+                <div class="why-block">
+                    <p class="why-text">
+                        Connect with a vibrant community of developers, architects, and tech enthusiasts. 
+                        Build meaningful relationships, exchange ideas, and discover collaboration opportunities 
+                        that extend far beyond this event.
+                    </p>
+                </div>
+
+                <div class="why-block">
+                    <p class="why-text">
+                        Experience hands-on learning through interactive workshops and live demonstrations. 
+                        Walk away with practical skills, proven strategies, and real-world solutions you can 
+                        implement right away.
+                    </p>
+                </div>
+
+                <div class="why-block-final">
+                    <p class="why-text-final">
+                        <strong>This isn't just another tech meetup — it's your opportunity to connect with the future, 
+                        learn from the best, and be part of something extraordinary.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule" id="schedule">
+        <div class="container">
+            <h2 class="schedule-title">Event Schedule</h2>
+            
+            <div class="schedule-item">
+                <div class="schedule-time">18:00</div>
+                <div class="schedule-event">🚪 Doors Open - Welcome & Registration</div>
+            </div>
+            
+            <div class="schedule-item">
+                <div class="schedule-time">18:15</div>
+                <div class="schedule-event">👋 Opening Keynote - The Future of Tech</div>
+            </div>
+            
+            <div class="schedule-item">
+                <div class="schedule-time">18:45</div>
+                <div class="schedule-event">💡 Technical Deep Dive - Expert Presentations</div>
+            </div>
+            
+            <div class="schedule-item">
+                <div class="schedule-time">19:30</div>
+                <div class="schedule-event">⚡ Lightning Talks & Q&A</div>
+            </div>
+            
+            <div class="schedule-item">
+                <div class="schedule-time">20:00</div>
+                <div class="schedule-event">🔨 Hands-On Workshop Sessions</div>
+            </div>
+            
+            <div class="schedule-item">
+                <div class="schedule-time">20:30</div>
+                <div class="schedule-event">🍕 Networking - Food, Drinks & Conversations</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Tech Meetup Zürich. Building the future together. 🚀</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced title animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const title = document.getElementById('main-title');
+            
+            // Split text into individual characters for dramatic effect
+            const text = title.textContent;
+            title.innerHTML = '';
+            
+            text.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                span.style.display = 'inline-block';
+                span.style.opacity = '0';
+                span.style.transform = 'translateY(50px) rotateX(90deg)';
+                span.style.animation = `charFlyIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${0.5 + index * 0.05}s forwards`;
+                title.appendChild(span);
+            });
+            
+            // Add dynamic style for character animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes charFlyIn {
+                    0% {
+                        opacity: 0;
+                        transform: translateY(50px) rotateX(90deg);
+                    }
+                    50% {
+                        opacity: 0.5;
+                        transform: translateY(-10px) rotateX(45deg);
+                    }
+                    100% {
+                        opacity: 1;
+                        transform: translateY(0) rotateX(0deg);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Mobile navigation toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const navbar = document.getElementById('navbar');
+
+        navToggle.addEventListener('click', function() {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for scroll animations
+        document.querySelectorAll('.info-card, .topic-card, .schedule-item, .why-block').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
