@@ -262,6 +262,20 @@
             box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
         }
 
+        .event-info-line {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 2s forwards;
+        }
+
+        .event-info-line strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
         .btn-secondary:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
@@ -610,6 +624,76 @@
             font-weight: 700;
         }
 
+        /* Speakers Section */
+        .speakers-section {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            padding: 6rem 0;
+            color: white;
+        }
+
+        .speakers-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .speaker-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .speaker-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            border: 4px solid rgba(102, 126, 234, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .speaker-card:hover .speaker-image {
+            border-color: rgba(102, 126, 234, 1);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .speaker-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .speaker-title {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+        }
+
         /* Schedule Section */
         .schedule {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
@@ -816,6 +900,9 @@
                     <a href="#topics" class="nav-link">Topics</a>
                 </li>
                 <li class="nav-item">
+                    <a href="#speakers" class="nav-link">Speakers</a>
+                </li>
+                <li class="nav-item">
                     <a href="#schedule" class="nav-link">Schedule</a>
                 </li>
                 <li class="nav-item">
@@ -852,8 +939,12 @@
                     <span>Register on Meetup</span>
                 </a>
                 <a href="https://www.linkedin.com/events/" class="btn btn-secondary" target="_blank">
-                    <span>Save on LinkedIn</span>
+                    <span>Register on LinkedIn</span>
                 </a>
+            </div>
+            
+            <div class="event-info-line">
+                <strong>Mittwoch, 28. Januar 2026</strong> | 16:30 - 19:00 | Isolutions AG, The Circle 38, 9th Floor, Zürich
             </div>
         </div>
         
@@ -883,9 +974,9 @@
                         Date & Time
                     </h3>
                     <p>
-                        <strong>Thursday, January 23, 2026</strong><br>
-                        6:00 PM - 8:30 PM CET<br>
-                        Networking until 9:30 PM
+                        <strong>Mittwoch, 28. Januar 2026</strong><br>
+                        16:30 - 18:00<br>
+                        Networking bis 19:00
                     </p>
                 </div>
 
@@ -1051,6 +1142,33 @@
                         <strong>This isn't just another tech meetup — it's your opportunity to connect with the future, 
                         learn from the best, and be part of something extraordinary.</strong>
                     </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section class="speakers-section" id="speakers">
+        <div class="container">
+            <h2 class="speakers-title">Our Speakers</h2>
+            
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                    <img src="assets/Reto Rüetschi.jpg" alt="Reto Rüetschi" class="speaker-image">
+                    <h3 class="speaker-name">Reto Rüetschi</h3>
+                    <p class="speaker-title">Project Manager</p>
+                </div>
+
+                <div class="speaker-card">
+                    <img src="assets/David Zeiter.png" alt="David Zeiter" class="speaker-image">
+                    <h3 class="speaker-name">David Zeiter</h3>
+                    <p class="speaker-title">Consultant</p>
+                </div>
+
+                <div class="speaker-card">
+                    <img src="assets/Christoph König.jpg" alt="Christoph König" class="speaker-image">
+                    <h3 class="speaker-name">Christoph König</h3>
+                    <p class="speaker-title">Engineer</p>
                 </div>
             </div>
         </div>
